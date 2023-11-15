@@ -38,9 +38,10 @@ public class No4659 {
                     isSuccess = true;
                     repeatSum = 1;
                 }
-                if (prevAlphabet == alphabet) {
+                if (repeatSum == 1 && prevAlphabet == alphabet) {
                     if (alphabet == 'e' || alphabet == 'o') {
                         //허용
+                        repeatSum++;
                         isSuccess = true;
                     } else {
                         //허용 x
