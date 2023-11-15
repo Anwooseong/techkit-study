@@ -39,7 +39,7 @@ public class No4659 {
                     repeatSum = 1;
                 }
                 if (prevAlphabet == alphabet) {
-                    if (alphabet == 'e' || alphabet == 'e') {
+                    if (alphabet == 'e' || alphabet == 'o') {
                         //허용
                         isSuccess = true;
                     } else {
