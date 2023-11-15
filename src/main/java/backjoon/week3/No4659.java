@@ -20,7 +20,17 @@ public class No4659 {
                         isSuccess = true;
                     }
                 }
-                if (gather.contains(String.valueOf(alphabet)) && gather.contains(String.valueOf(prevAlphabet))) {
+                if (repeatSum == 1 && prevAlphabet == alphabet) {
+                    if (alphabet == 'e' || alphabet == 'o') {
+                        //허용
+                        repeatSum++;
+                        isSuccess = true;
+                    } else {
+                        //허용 x
+                        isSuccess = false;
+                        break;
+                    }
+                } else if (gather.contains(String.valueOf(alphabet)) && gather.contains(String.valueOf(prevAlphabet))) {
                     repeatSum++;
                     if (repeatSum == 3) {
                         //허용 x
@@ -37,17 +47,6 @@ public class No4659 {
                 } else {
                     isSuccess = true;
                     repeatSum = 1;
-                }
-                if (repeatSum == 1 && prevAlphabet == alphabet) {
-                    if (alphabet == 'e' || alphabet == 'o') {
-                        //허용
-                        repeatSum++;
-                        isSuccess = true;
-                    } else {
-                        //허용 x
-                        isSuccess = false;
-                        break;
-                    }
                 }
                 prevAlphabet = alphabet;
             }
