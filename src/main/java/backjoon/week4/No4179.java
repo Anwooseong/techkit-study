@@ -96,20 +96,6 @@ public class No4179 {
 
             }
         }
-//        if (x < 0 || x >= R || y < 0 || y >= C) {
-//            return;
-//        }
-//        if (time >= fire[x][y] || maze[x][y] == '#') {
-//            return;
-//        }
-//        if (x == R - 1 || y == C - 1) {
-//            //success
-//            answer = Math.min(answer, time);
-//        }
-//        movePersonBFS(x - 1, y, time + 1);
-//        movePersonBFS(x + 1, y, time + 1);
-//        movePersonBFS(x, y - 1, time + 1);
-//        movePersonBFS(x, y + 1, time + 1);
         return 0;
     }
 }
