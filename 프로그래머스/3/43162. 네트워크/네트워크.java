@@ -1,34 +1,21 @@
 class Solution {
-    
-    static boolean[] check;
-    static int answer;
-    
     public int solution(int n, int[][] computers) {
+        int answer = 0;
+        // for(int i = 0 ; i < computers.length; i++){
+        //     for(int j = 0; j < computers[i].length; j++){
+        //         System.out.print(computers[i][j]);
+        //     }
+        //     System.out.println();
+        // }
         
-        check = new boolean[n];
-        answer = 0;
-        
-        for(int i = 0; i < n; i++){
-            if(!check[i]){
-                dfs(computers, i);
-                answer++;                
+        for(int i = 0 ; i < computers.length - 1; i++) {
+            for(int j = i + 1; j < computers[i].length; j++){
+                if(computers[i][j] == 1){
+                    System.out.println(""+i+" - "+j);
+                    answer ++;
+                }
             }
         }
-        
-        
         return answer;
     }
-    
-    void dfs(int[][] computers, int row){
-        check[row] = true;
-        
-        for(int i = 0; i < computers[row].length; i++){
-            if(row != i && computers[row][i] == 1 && !check[i]){
-                dfs(computers, i);
-            }
-        }
-        
-        
-    }
-    
 }
