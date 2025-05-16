@@ -18,12 +18,12 @@ public class Solution {
 			Y = Integer.parseInt(st.nextToken());
 			Z = Integer.parseInt(st.nextToken());
 			
-			long maxScore;
+			int maxScore;
 
             if (X + Y >= 2 * Z) {
                 maxScore = B * X + W * Y;
             } else {
-                maxScore = Math.max(0L, B - W) * X + Math.max(0L, W - B) * Y + 2L * Math.min(B, W) * Z;
+                maxScore = Math.max(0, B - W) * X + Math.max(0, W - B) * Y + 2 * Math.min(B, W) * Z;
             }
 
 			System.out.println(maxScore);
