@@ -2,58 +2,65 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-
-    public static void main(String[] args) throws IOException {
-
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
-        Map<Integer, Integer> map = new HashMap<>();
-
-        int N = Integer.parseInt(bf.readLine());
-        String line = bf.readLine();
-        StringTokenizer st = new StringTokenizer(line);
-
-        for (int i = 0; i < N; i++) {
-            int num = Integer.parseInt(st.nextToken());
-            if (!map.containsKey(num)) {
-                map.put(num, 1);
-            } else {
-                map.put(num, map.get(num) + 1);
-            }
-        }
-        List<Integer> list = new ArrayList(map.keySet());
-        Collections.sort(list); // -10 2 3 6 10
-
-        int M = Integer.parseInt(bf.readLine());
-        String problemLine = bf.readLine();
-        StringTokenizer token = new StringTokenizer(problemLine);
-        for (int i = 0; i < M; i++) {
-            int num = Integer.parseInt(token.nextToken());
-
-            int left = 0;
-            int right = list.size() - 1;
-            boolean isCheck = false;
-            while (left <= right) {
-                int mid = (left + right) / 2;
-
-                if (list.get(mid) == num) {
-                    isCheck = true;
-                    bw.write(map.get(num) + " ");
-                    break;
-                } else if (list.get(mid) < num) {
-                    left = mid + 1;
-                } else {
-                    right = mid - 1;
-                }
-            }
-            if (!isCheck) {
-                bw.write("0 ");
-            }
-
-        }
-
-        bw.flush();
-        bw.close();
-    }
+	
+	static int N, M;
+	static int[] arr;
+	
+	public static void main(String[] args) throws Exception{
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		StringBuilder sb = new StringBuilder();
+		
+		N = Integer.parseInt(bf.readLine());
+		arr = new int[N];
+		
+		st = new StringTokenizer(bf.readLine(), " ");
+		for(int i = 0; i < N; i++) {
+			arr[i] = Integer.parseInt(st.nextToken());
+		}
+		
+		Arrays.sort(arr);
+		
+		M = Integer.parseInt(bf.readLine());
+		st = new StringTokenizer(bf.readLine(), " ");
+		for(int i = 0; i < M; i++) {
+			int num = Integer.parseInt(st.nextToken());
+			sb.append(upperBinarySearch(num)- lowerBinarySearch(num) + " ");
+		}
+		
+		System.out.println(sb);
+	}
+	
+	private static int lowerBinarySearch(int num) {
+		int left = 0;
+		int right = arr.length - 1;
+		
+		while(left <= right) {
+			int mid = (left + right) / 2;
+			if(num <= arr[mid]) {
+				right = mid - 1;
+			}else {
+				left = mid + 1;
+			}
+		}
+		
+		return left;
+	}
+	
+	private static int upperBinarySearch(int num) {
+		int left = 0;
+		int right = arr.length - 1;
+		
+		while(left <= right) {
+			int mid = (left + right) / 2;
+			
+			if(num < arr[mid]) {
+				right = mid - 1;
+			}else {
+				left = mid + 1;
+			}
+		}
+		
+		return left;
+	}
 }
