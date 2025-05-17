@@ -2,60 +2,56 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
+	
+	static int N, M, totalSize; 
+	static long left, right;
+	static int[] arr;
+	
+	public static void main(String[] args) throws Exception{
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		
+		st = new StringTokenizer(bf.readLine(), " ");
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
+		arr = new int[N];
+		totalSize = 0;
+		left = 0;
+		
+		st = new StringTokenizer(bf.readLine(), " ");
+		for(int i = 0; i < N; i++) {
+			arr[i] = Integer.parseInt(st.nextToken());
+			totalSize += arr[i];
+			left = Math.max(left, arr[i]);
+		}
+		
+		right = totalSize;
+		while(left <= right) {
+			long mid = (left + right) / 2;
+			
+			int cnt = calculateCnt(mid);
+			if(cnt > M) {
+				left = mid + 1;
+			}else if(cnt <= M) {
+				right = mid - 1;
+			}else {
+				right = mid - 1;
+			}
+		}
+		System.out.println(left);
+	}
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-
-        StringTokenizer st = new StringTokenizer(bf.readLine(), " ");
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-
-        int[] arr = new int[N];
-        int start = 0;
-        int finish = 0;
-        int mid = 0;
-        st = new StringTokenizer(bf.readLine(), " ");
-        for (int i = 0; i < N; i++) {
-            int num = Integer.parseInt(st.nextToken());
-            arr[i] = num;
-            start = Math.max(start, num);
-            finish += num;
-        }
-
-        while (start < finish) {
-            mid = (start + finish) / 2;
-
-            int count = 0;
-            int sum = 0;
-            for (int i = 0; i < N; i++) {
-                sum += arr[i];
-
-                if (sum == mid) {
-                    sum = 0;
-                    count++;
-                } else if (sum > mid) {
-                    sum = arr[i];
-                    count++;
-
-                } else if (i == N - 1) {
-                    sum = 0;
-                    count++;
-                }
-            }
-            if (sum > 0) {
-                sum = 0;
-                count++;
-            }
-
-            if (count <= M) {
-                finish = mid;
-            } else {
-                start = mid+1;
-            }
-
-        }
-        System.out.println(start);
-
-
-    }
+	private static int calculateCnt(long num) {
+		int cnt = 1;
+		long sum = num;
+		for(int i = 0; i < N; i++) {
+			if(sum < arr[i]) {
+				sum = num;
+				cnt++;
+			}
+			sum -= arr[i];
+		}
+		
+		return cnt;
+	}
 }
