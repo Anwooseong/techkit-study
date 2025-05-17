@@ -32,8 +32,6 @@ public class Main {
 			int cnt = calculateCnt(mid);
 			if(cnt > M) {
 				left = mid + 1;
-			}else if(cnt <= M) {
-				right = mid - 1;
 			}else {
 				right = mid - 1;
 			}
