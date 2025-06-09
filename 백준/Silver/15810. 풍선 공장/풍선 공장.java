@@ -22,10 +22,9 @@ public class Main {
 		st = new StringTokenizer(bf.readLine(), " ");
 		for(int i = 0; i < N; i++) {
 			A[i] = Integer.parseInt(st.nextToken());
+			left = Math.min((long) A[i], left);
 			right = Math.max((long) A[i] * (long) M, right);
 		}
-		
-		left = 0;
 		
 		while(left <= right) {
 			long mid = (left + right) / 2;
@@ -38,7 +37,7 @@ public class Main {
 			}
 		}
 		
-		System.out.println(left);
+		System.out.println(right + 1);
 	}
 	
 	private static long calculate(long time) {
